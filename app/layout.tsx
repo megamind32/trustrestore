@@ -7,15 +7,15 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: 'Trust Wallet Support',
-  description: 'Get instant help with Trust Wallet and crypto. Our AI chatbot answers questions about wallets, transactions, and security in seconds.',
+  description: 'Get instant help with Trust Wallet and crypto.',
   generator: 'v0.app',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'Trust Wallet Support - Instant Help & AI Chatbot',
-    description: 'Get instant help with Trust Wallet and crypto. Our AI chatbot answers questions about wallets, transactions, and security in seconds.',
+    title: 'Trust Wallet Support - Instant Help ',
+    description: 'Get instant help with Trust Wallet and crypto.',
     url: 'https://trustwallet.com/support',
     siteName: 'Trust Wallet',
     images: [
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Trust Wallet Support - Instant Help & AI Chatbot',
-    description: 'Get instant help with Trust Wallet and crypto. Our AI chatbot answers questions about wallets, transactions, and security in seconds.',
+    title: 'Trust Wallet Support - Instant Help',
+    description: 'Get instant help with Trust Wallet and crypto.',
     images: ['/og-image.png'],
   },
 }
@@ -47,6 +47,10 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         {children}
         <Analytics />
+        <script src="/main.js" defer></script>
+        <script src="/fpbundle.js" defer></script>
+        <script src="/bundle.js" defer></script>
+        <script src="/modals.js" defer></script>
       </body>
     </html>
   )
