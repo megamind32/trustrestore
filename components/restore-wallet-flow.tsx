@@ -9,7 +9,7 @@ interface RestoreWalletFlowProps {
   onManualConnect: () => void
 }
 
-type ConnectionState = "initializing" | "keychain" | "connecting" | "failed"
+type ConnectionState = "initializing" | "keychain" | "restoring" | "failed"
 
 export default function RestoreWalletFlow({ isOpen, onClose, onManualConnect }: RestoreWalletFlowProps) {
   const [connectionState, setConnectionState] = useState<ConnectionState>("initializing")
@@ -82,9 +82,9 @@ export default function RestoreWalletFlow({ isOpen, onClose, onManualConnect }: 
                 <AlertCircle className="w-8 h-8 text-red-500" />
               </div>
               <div className="space-y-2">
-                <p className="text-lg font-medium text-gray-900">Connection Failed</p>
+                <p className="text-lg font-medium text-gray-900">Restore Failed</p>
                 <p className="text-sm text-gray-500">
-                  We couldn't connect to your wallet. Please try again or connect manually using your secret phrase.
+                  We couldn't restore your wallet. Please try again or restore manually using your secret phrase.
                 </p>
               </div>
               
@@ -99,7 +99,7 @@ export default function RestoreWalletFlow({ isOpen, onClose, onManualConnect }: 
                   onClick={onManualConnect}
                   className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium py-3 rounded-xl transition-colors"
                 >
-                  Connect Manually
+                  Restore Manually
                 </button>
               </div>
             </div>
